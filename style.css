@@ -1960,7 +1960,7 @@ margin-top: 30px
 #course-inner .enroll {
 margin-top: 25px;
 }
-/* assignments section */
+/* assignment section*/
 .assignment-section {
   padding: 15px;
   margin-top: 30px;
@@ -1982,26 +1982,10 @@ margin-top: 25px;
 }
 }
 
-@media (max-width: 480px) {
-.assignment-section h2 {
-  font-size: 1.3rem;
-}
-
-.assignment-card object {
-  height: 300px;
-}
 
 
 
 
-/* contact */
-#contact {
-	padding: 8vw 4vw;
-}
-#contact .getin{
-  width: 250px;
-}
-}
 
 @media (max-width: 475px) {
   #registration{
@@ -2079,6 +2063,16 @@ font-size: 22px;
 #course-inner .enroll{
   width: 100%;
 }
+/*assignment section*/
+.assignment-section h2 {
+  font-size: 1.3rem;
+}
+
+.assignment-card object {
+  height: 300px;
+
+
+
 /* contact */
 #contact{
   padding: 8vw 4vw;
@@ -2109,5 +2103,6 @@ font-size: 22px;
 footer input{
 width: 100%;
 margin-bottom: 20px;
+}
 }
 }
