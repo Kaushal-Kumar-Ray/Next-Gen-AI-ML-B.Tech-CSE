@@ -1542,6 +1542,28 @@ footer .copyright .pro-links i:hover {
   transform: translateY(-5px);
   box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
 }
+.download-btn {
+  text-align: center;
+  margin-top: 15px;
+}
+
+.download-btn button {
+  background: #0ff;
+  color: black;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+}
+
+.download-btn button:hover {
+  background: #fdd835;
+  box-shadow: 0 0 25px rgba(253, 216, 53, 0.8);
+}
 
 
 /* Learn Section */
