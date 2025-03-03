@@ -516,7 +516,7 @@ nav .navigation ul li a.active {
 
 /* Cost Circle - Neon Glow Effect */
 #course .courses .cost {
-  background-color: #0ff;
+  background-color: rgb(30, 255, 0);
   color: white;
   line-height: 70px;
   width: 70px;
