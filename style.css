@@ -1544,6 +1544,10 @@ footer .copyright .pro-links i:hover {
   transform: translateY(-5px);
   box-shadow: 0 0 25px rgba(0, 255, 255, 0.6);
 }
+.object {
+  width: 800px;
+  height: 550px;
+}
 .download-btn {
   text-align: center;
   margin-top: 15px;
@@ -2105,9 +2109,9 @@ margin-top: 25px;
   height: auto;
 }
 
-.assignment-card object {
-  width: 800px;
-  height: 400px;
+.object {
+  width: 310px;
+  height: 260px;
 }
 }
 
