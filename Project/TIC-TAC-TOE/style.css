@@ -1,0 +1,274 @@
+/* Futuristic Cyberpunk Tic-Tac-Toe Styles */
+
+@keyframes neonBackground {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+body {
+    font-family: 'Orbitron', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: linear-gradient(270deg, #0f0c29, #302b63, #24243e, #0f0c29);
+    background-size: 400% 400%;
+    animation: neonBackground 10s infinite alternate ease-in-out;
+    color: #0ff;
+    text-shadow: 0 0 5px cyan, 0 0 10px cyan;
+}
+
+
+h1 {
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+/* Futuristic Navigation Bar */
+nav {
+  
+    position: fixed;
+    width: 100%;
+    backdrop-filter: blur(15px); /* Glassmorphism effect */
+    background: rgba(255, 255, 255, 0.1); /* Transparent background */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1vw 8vw;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.25);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    z-index: 999;
+    transition: 0.4s ease-in-out;
+  }
+  /* Navigation bar*?
+  /* Logo */
+  nav img {
+    width: 160px;
+    cursor: pointer;
+    filter: drop-shadow(0px 0px 10px rgba(255, 255, 255, 0.7));
+    transition: transform 0.3s ease;
+  }
+  nav img:hover {
+    transform: scale(1.1);
+  }
+  
+  /* Navigation Links */
+  nav .navigation {
+    display: flex;
+  }
+  
+  nav .navigation ul {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  
+  nav .navigation ul li {
+    list-style: none;
+    margin-left: 30px;
+  }
+  
+  /* Futuristic Hover Effect */
+  nav .navigation ul li a {
+    text-decoration: none;
+    color: #0ff; /* Neon Cyan */
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: all 0.4s ease;
+    position: relative;
+    padding: 5px 10px;
+  }
+  
+  /* Neon Glow Hover */
+  nav .navigation ul li a::before {
+    content: "";
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    bottom: -3px;
+    left: 50%;
+    background: #0ff;
+    transition: width 0.3s ease, left 0.3s ease;
+  }
+  nav .navigation ul li a:hover::before {
+    width: 100%;
+    left: 0;
+  }
+  
+  nav .navigation ul li a:hover,
+  nav .navigation ul li a.active {
+    color: #ff004c; /* Neon Pink */
+    text-shadow: 0px 0px 10px rgba(255, 0, 76, 0.8);
+  }
+  
+  /* Futuristic Hamburger Menu */
+  #menu-btn {
+    width: 40px;
+    height: 40px;
+    display: none;
+    cursor: pointer;
+    filter: drop-shadow(0px 0px 5px #0ff);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  #menu-btn:hover {
+    transform: rotate(90deg) scale(1.2);
+  }
+  
+  /* Close Icon */
+  #menu-close {
+    display: none;
+  }
+  
+  /* Mobile Responsiveness */
+  @media screen and (max-width: 768px) {
+    nav .navigation ul {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.8);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        display: none;
+        transition: all 0.5s ease;
+    }
+    nav .navigation ul li {
+        margin: 20px 0;
+    }
+    nav .navigation ul li a {
+        font-size: 20px;
+        color: #0ff;
+    }
+    #menu-btn {
+        display: block;
+    }
+  }
+  
+#board {
+    display: grid;
+    grid-template-columns: repeat(3, 120px);
+    grid-gap: 8px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    box-shadow: 0 0 15px cyan;
+}
+
+.cell {
+    width: 120px;
+    height: 120px;
+    font-size: 36px;
+    font-weight: bold;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid cyan;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease-in-out;
+}
+
+.cell:hover {
+    background: rgba(0, 255, 255, 0.2);
+    box-shadow: 0 0 10px cyan;
+}
+
+#turn-indicator {
+    font-size: 1.5rem;
+    margin-top: 20px;
+}
+
+#restart-container, #result-container {
+    margin-top: 20px;
+}
+
+button {
+    font-size: 18px;
+    padding: 12px 24px;
+    cursor: pointer;
+    background: transparent;
+    border: 2px solid cyan;
+    color: #0ff;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+    background: cyan;
+    color: #24243e;
+    box-shadow: 0 0 15px cyan;
+}
+
+#result-container {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: #0ff;
+    text-shadow: 0 0 10px cyan;
+}
+@media (max-width: 769px){
+    nav{
+    position: 15px 20px;
+   
+    }
+    nav img{
+      width: 130px;
+    }
+  
+      #home{
+        background-image: linear-gradient(rgba(9, 5, 54, 0.3), rgba(5, 4, 46, 0.7)), url("images/back_phone.jpg");
+      }
+    #menu-btn{
+      
+      display: initial;
+    }
+    #menu-close{
+      display: initial;
+      font-size: 1.6rem;
+      color: white;
+      padding: 30px 0 20px 20px;
+    }
+    nav .navigation ul{
+      position: absolute;
+      top: 0;
+      right: -220px;
+      width: 220px;
+      height: 100vh;
+      background-color: rgba(17, 20, 104, 0.45);
+      backdrop-filter: blur(4.5px);
+      border: 1px solid rgba(225, 255, 255, 0.18);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start;
+      transition: 0.3s ease;
+    }
+    nav .navigation ul.active{
+      right: 0;
+    }
+    nav .navigation ul li{
+      padding: 20px 0 20px 40px;
+      margin-left: 0;
+    }
+    nav .navigation ul li a{
+      color: white;
+    }}
