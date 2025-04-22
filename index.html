@@ -184,39 +184,38 @@
 
                 <!------------------->
         
-        <script>
-            const words = ["Enhance Your Future With AI & ML ", "Welcome Here "];
-            let index = 0;
-            let charIndex = 0;
-            let isDeleting = false;
-            const speed = 100; // Typing speed
-            const delay = 1500; // Delay before deleting
-        
-            function typeEffect() {
-                const h2Element = document.getElementById("dynamic-text");
-                const currentWord = words[index];
-        
-                if (isDeleting) {
-                    h2Element.textContent = currentWord.substring(0, charIndex--);
-                } else {
-                    h2Element.textContent = currentWord.substring(0, charIndex++);
-                }
-        
-                if (!isDeleting && charIndex === currentWord.length) {
-                    isDeleting = true;
-                    setTimeout(typeEffect, delay);
-                } else if (isDeleting && charIndex === 0) {
-                    isDeleting = false;
-                    index = (index + 1) % words.length;
-                    setTimeout(typeEffect, 300);
-                } else {
-                    setTimeout(typeEffect, isDeleting ? 50 : speed);
-                }
-            }
-        
-            document.addEventListener("DOMContentLoaded", typeEffect);
-        </script>
-
+                <script>
+                    const words = ["Welcome ", "Let's Start "];
+                    let index = 0;
+                    let charIndex = 0;
+                    let isDeleting = false;
+                    const speed = 100; // Typing speed
+                    const delay = 1500; // Delay before deleting
+                
+                    function typeEffect() {
+                      const h2Element = document.getElementById("dynamic-text");
+                      const currentWord = words[index];
+                
+                      if (isDeleting) {
+                        h2Element.textContent = currentWord.substring(0, charIndex--);
+                      } else {
+                        h2Element.textContent = currentWord.substring(0, charIndex++);
+                      }
+                
+                      if (!isDeleting && charIndex === currentWord.length) {
+                        isDeleting = true;
+                        setTimeout(typeEffect, delay);
+                      } else if (isDeleting && charIndex === 0) {
+                        isDeleting = false;
+                        index = (index + 1) % words.length;
+                        setTimeout(typeEffect, 300);
+                      } else {
+                        setTimeout(typeEffect, isDeleting ? 50 : speed);
+                      }
+                    }
+                
+                    document.addEventListener("DOMContentLoaded", typeEffect);
+                  </script>
 
 
 
