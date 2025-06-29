@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Next-Gen AI & ML | B.Tech CSE</title>
+        <link rel="icon" type="image/x-icon" href="images/icon.png">
+        <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" />
+
+        <link rel="stylesheet" href="style.css">
+
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    </head>
+
+    <body>
+
+          
+
+ <!------------ Navigation -------------->
+        <nav>
+            <a href="../index.html" class="logo">
+                <img src="images/logo.png" alt="">
+            </a>
+            <div class="navigation">
+                <ul>
+                    <i id="menu-close" class="fas fa-times"></i>
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../About/about.html">About</a></li>
+                    <li><a class="active" href="blog.html">Blog</a></li>
+                    <li><a href="../Tasks/tasks.html">Tasks</a></li>
+                    <li><a href="../resources/course.html">Resources</a></li>
+                    <li><a href="../contact.html">Contact</a></li>
+                </ul>
+                <img id="menu-btn" src="images/menu.png" alt="">
+            </div>
+        </nav>
+
+
+
+
+<!----------------- Home ------------------->
+<section id="blog-container">
+    <div class="blogs blogpost">
+        <div class="post">
+            <img src="images/b2.jpg" alt="">
+            <h3>Advancements in Quantum Computing</h3>
+            <p><p>
+                Quantum computing is one of the most revolutionary and promising fields in modern technology. Unlike classical computing, which uses bits to process information in binary (0s and 1s), quantum computing utilizes quantum bits or "qubits." These qubits take advantage of the principles of quantum mechanics—superposition, entanglement, and interference—to perform complex calculations that are currently infeasible for traditional computers. In recent years, significant advancements have been made in both quantum hardware and software, signaling a shift from theoretical potential to real-world applications.<br><br>
+                One of the most notable advancements in quantum computing is the increase in qubit count and quality. Companies like IBM, Google, Rigetti, and IonQ have been working diligently to build more stable and scalable quantum processors. In 2023, IBM introduced its Condor processor, featuring over 1,000 qubits, a milestone in quantum hardware. While simply increasing the number of qubits is not enough—due to issues like noise and decoherence—efforts are also being made to improve qubit fidelity and error correction techniques. These advancements are vital to maintaining qubit states long enough to perform useful calculations.<br><br>
+                Error correction remains one of the most challenging aspects of quantum computing. Quantum systems are extremely sensitive to external disturbances, which can easily disrupt calculations. However, researchers have made progress in developing more efficient quantum error correction codes. Google's quantum team, for instance, has demonstrated logical qubits that can remain error-free for longer durations by using surface code techniques. These improvements are critical for achieving fault-tolerant quantum computing, a state where a quantum computer can operate reliably over long periods.<br><br>
+                On the software and algorithm front, there have also been significant strides. Quantum algorithms are being refined and adapted for near-term quantum computers, often referred to as NISQ (Noisy Intermediate-Scale Quantum) devices. Algorithms like Variational Quantum Eigensolver (VQE) and Quantum Approximate Optimization Algorithm (QAOA) are being tested for practical use in areas like chemistry, logistics, and financial modeling. Companies such as Microsoft and Xanadu are also building comprehensive quantum software platforms to help developers simulate and deploy quantum algorithms more easily.<br><br>
+                Another major development is the rise of quantum networking and communication. Researchers are exploring ways to link quantum computers over distances using quantum entanglement. Quantum key distribution (QKD), for example, allows for ultra-secure communication by transmitting encryption keys using quantum particles. Some countries, including China and the United States, are investing heavily in building quantum internet infrastructure, which could revolutionize cybersecurity in the future.<br><br>
+                Cloud-based access to quantum computers is also transforming the landscape. Tech giants like IBM, Amazon (Braket), and Microsoft (Azure Quantum) have made quantum computers accessible to developers and researchers worldwide through cloud platforms. This democratizes quantum computing and accelerates innovation by allowing more people to experiment and develop new applications without needing direct access to quantum hardware.<br><br>
+                </p>
+                </p>
+
+
+                    <a href="post2next.html">Read Next ?</a>
+                </div>
+    </div>
+</section>
+
+
+<!----------------- Footer ---------------->
+        <footer>
+            <div class="footer-col">
+                <h3>Top Products</h3>
+                <li>Manage Reputation</li>
+                <li>Power Tools</li>
+                <li>Managed Website</li>
+                <li>Marketing Serivce</li>
+            </div>
+            <div class="foooter-col">
+                <h3>Quick Liks</h3>
+                <li>Jobs</li>
+                <li>Brand Assets</li>
+                <li>Investors Relations</li>
+                <li>Terms of Service</li>
+            </div>
+            <div class="foooter-col">
+                <h3>Features</h3>
+                <li>Manage Reputation</li>
+                <li>Power Tools</li>
+                <li>Managed Website</li>
+                <li>Marketing Service</li>
+            </div>
+            <div class="footer-col">
+                <h3>Resources</h3>
+                <li>Guides</li>
+                <li>Research</li>
+                <li>Experts</li>
+                <li>Marketing Service</li>
+            </div>
+            <div class="footer-col">
+                <h3>Newsletter</h3>
+                <p>You can trust us. we only send promo offers, </p>
+                <div class="subscribe">
+                <input type="text" placeholder="Your Email address">
+                <a href="#" class="yellow">SUBSCRIBE</a>
+            </div>
+            </div>
+                <div class="copyright">
+                    <p>Copyright ©2025 All rights reserved by BCI | Made with ♡ by Kaushal Kumar Ray </p>
+                    <div class="pro-links">
+                        <i class="fab fa-facebook-f"></i>
+                        <i class="fab fa-instagram"></i>
+                        <i class="fab fa-linkedin-in"></i>
+                    </div>
+
+                </div>
+        </footer>
+
+
+        <script>
+            $('#menu-btn').click(function(){
+                $('nav .navigation ul').addClass('active')
+            });
+            $('#menu-close').click(function(){
+                $('nav .navigation ul').removeClass('active')
+            });
+            // Navaigation Bar
+
+        </script>
+
+
+    </body>
+
+</html>
