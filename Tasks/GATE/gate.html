@@ -10,12 +10,26 @@
 
   <!-- ══════════════════════════════════════════
        TIER 1: SITE-WIDE TOP NAV
+       Desktop: [logo] ... [site links]
+       Mobile:  [sidebar☰] [GATE DA title] [🔥streak] [site☰]
   ══════════════════════════════════════════ -->
   <nav class="topnav" id="topnav">
+
+    <!-- Mobile-only: sidebar drawer toggle (left) -->
+    <button class="app-bar-hamburger" id="sidebarHamburger" aria-label="Open app menu">☰</button>
+
+    <!-- Desktop: logo link -->
     <a href="../../index.html" class="topnav-logo">
       <img src="logo.png" alt="MicroLearn Logo" />
     </a>
 
+    <!-- Mobile-only: app name centered -->
+    <span class="app-bar-title">GATE DA 2026</span>
+
+    <!-- Mobile-only: streak pill -->
+    <span class="streak-badge" id="mobileStreak">🔥 0</span>
+
+    <!-- Desktop: site links -->
     <ul class="topnav-links" id="topnavLinks">
       <li><a href="../../index.html">Home</a></li>
       <li><a href="../../About/about.html">About</a></li>
@@ -25,8 +39,8 @@
       <li><a href="../../contact.html">Contact</a></li>
     </ul>
 
-    <!-- Mobile hamburger for site nav -->
-    <button class="topnav-hamburger" id="topnavHamburger" aria-label="Toggle menu">
+    <!-- Mobile-only: site-nav hamburger (right) -->
+    <button class="topnav-hamburger" id="topnavHamburger" aria-label="Toggle site menu">
       <span></span><span></span><span></span>
     </button>
   </nav>
@@ -70,12 +84,6 @@
     <!-- Dim overlay for mobile sidebar -->
     <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
-    <!-- ── MOBILE APP BAR (shows only on small screens, below topnav) ── -->
-    <header class="app-bar" id="appBar">
-      <button class="app-bar-hamburger" id="sidebarHamburger" aria-label="Open sidebar">☰</button>
-      <span class="app-bar-title">GATE DA 2026</span>
-      <span class="streak-badge" id="mobileStreak">🔥 0</span>
-    </header>
 
     <!-- ══════════════════════════════════════════
          MAIN CONTENT

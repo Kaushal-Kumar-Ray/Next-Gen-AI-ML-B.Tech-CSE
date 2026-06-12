@@ -15,20 +15,20 @@
   --text-muted: #7d8998;
   --text-dim:   #4d5969;
 
-  --amber:      #0084ff;
-  --amber-dim:  #230085;
+  --amber:      #0090f0;
+  --amber-dim:  #003aa6;
   --amber-glow: rgba(240,165,0,0.12);
 
   --green:      #3fb950;
   --red:        #f85149;
   --blue:       #58a6ff;
   --purple:     #bc8cff;
-  --orange:     #57a0ff;
+  --orange:     #5776ff;
 
   /* Layout dimensions */
-  --topnav-h:   58px;     /* site-wide top nav height */
+  --topnav-h:   56px;     /* site-wide top nav height */
   --sidebar-w:  220px;    /* app sidebar width */
-  --app-bar-h:  48px;     /* mobile-only app bar height */
+  --app-bar-h:  56px;     /* kept for reference */
 
   --radius:    10px;
   --radius-sm: 6px;
@@ -303,49 +303,52 @@ body {
 
 
 /* ════════════════════════════════════════════
-   MOBILE APP BAR
-   Shown only on small screens, below topnav.
-   Provides a hamburger to open the sidebar.
+   MOBILE APP BAR — always hidden.
+   On mobile the sidebar hamburger lives
+   directly inside .topnav instead.
 ════════════════════════════════════════════ */
-.app-bar {
-  display: none; /* hidden by default, shown via media query */
-  position: sticky;
-  top: 0; /* sticks to top of its scroll container (main-content wrapper) */
-  height: var(--app-bar-h);
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
-  align-items: center;
-  padding: 0 16px;
-  gap: 12px;
-  z-index: 100;
-}
+.app-bar { display: none !important; }
 
+/* Sidebar hamburger — hidden on desktop,
+   shown inside topnav on mobile */
 .app-bar-hamburger {
+  display: none;
   background: none;
   border: none;
   color: var(--text);
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   cursor: pointer;
-  padding: 4px;
+  padding: 6px 8px;
   line-height: 1;
+  border-radius: var(--radius-sm);
+  transition: background var(--trans);
+  flex-shrink: 0;
 }
+.app-bar-hamburger:hover { background: var(--surface2); }
 
+/* App title + streak — hidden on desktop,
+   shown inside topnav on mobile */
 .app-bar-title {
-  flex: 1;
-  font-size: 0.9rem;
+  display: none;
+  font-size: 0.88rem;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
   color: var(--amber);
+  flex: 1;
+  text-align: center;
 }
 
 .streak-badge {
-  font-size: 0.82rem;
+  display: none;
+  font-size: 0.78rem;
   font-weight: 600;
   background: var(--amber-glow);
   color: var(--amber);
-  padding: 4px 10px;
+  padding: 3px 9px;
   border-radius: 20px;
   border: 1px solid rgba(240,165,0,0.25);
+  flex-shrink: 0;
+  white-space: nowrap;
 }
 
 
@@ -985,72 +988,113 @@ body {
 
 
 /* ════════════════════════════════════════════
-   RESPONSIVE — 768px: mobile layout
-   - Site topnav links collapse into overlay
-   - Sidebar becomes a drawer (off-canvas)
-   - App bar appears with sidebar hamburger
+   RESPONSIVE — 768px: true mobile layout
+   Single topnav bar contains:
+     [sidebar ☰] [logo / app title] [streak] [site ☰]
+   Sidebar becomes off-canvas drawer from left.
+   Site-nav links become off-canvas from right.
 ════════════════════════════════════════════ */
 @media (max-width: 768px) {
 
-  /* ── Site topnav on mobile ── */
-  .topnav { padding: 0 16px; }
+  /* ── Topnav becomes a 4-item row ── */
+  .topnav {
+    padding: 0 12px;
+    gap: 8px;
+    height: 52px;
+    --topnav-h: 52px;
+  }
 
+  /* Show sidebar hamburger on the left of topnav */
+  .app-bar-hamburger { display: flex; align-items: center; }
+
+  /* Show app title in the middle (hide desktop logo img) */
+  .topnav-logo { display: none; }
+  .app-bar-title { display: block; }
+
+  /* Show streak badge before site-nav hamburger */
+  .streak-badge { display: flex; align-items: center; }
+
+  /* Show site-nav hamburger on far right */
   .topnav-hamburger { display: flex; }
 
+  /* Site-nav links: off-canvas from right */
   .topnav-links {
-    /* off-canvas slide-in from the right */
     position: fixed;
     top: var(--topnav-h);
     right: -100%;
-    width: 240px;
+    width: 220px;
     height: calc(100vh - var(--topnav-h));
-    background: rgba(13,17,23,0.97);
-    backdrop-filter: blur(16px);
+    background: rgba(13,17,23,0.98);
+    backdrop-filter: blur(20px);
     flex-direction: column;
     align-items: flex-start;
-    padding: 24px 20px;
-    gap: 4px;
+    padding: 20px 16px;
+    gap: 2px;
     z-index: 299;
-    transition: right 0.25s ease;
+    transition: right 0.25s cubic-bezier(0.4,0,0.2,1);
     border-left: 1px solid var(--border);
+    box-shadow: -8px 0 32px rgba(0,0,0,0.5);
   }
 
   .topnav-links.open { right: 0; }
 
+  .topnav-links li { width: 100%; }
+
   .topnav-links li a {
-    font-size: 0.95rem;
+    font-size: 0.88rem;
     padding: 10px 14px;
     width: 100%;
+    display: block;
+    border-radius: var(--radius-sm);
   }
 
-  /* ── App sidebar on mobile: off-canvas drawer ── */
+  /* ── App sidebar: off-canvas drawer from left ── */
   .sidebar {
     transform: translateX(-100%);
     width: 260px;
     top: var(--topnav-h);
-    z-index: 210;
+    z-index: 250;
+    box-shadow: none;
+    transition: transform 0.25s cubic-bezier(0.4,0,0.2,1),
+                box-shadow 0.25s ease;
   }
 
   .sidebar.open {
     transform: translateX(0);
-    box-shadow: 6px 0 32px rgba(0,0,0,0.6);
+    box-shadow: 8px 0 40px rgba(0,0,0,0.7);
   }
 
-  /* ── App bar appears on mobile ── */
-  .app-bar { display: flex; }
+  /* ── App shell: correct top offset ── */
+  .app-shell { margin-top: var(--topnav-h); }
 
-  /* ── Main content needs no sidebar offset ── */
+  /* ── Main: no sidebar offset, full width ── */
   .main-content {
     margin-left: 0;
-    padding: 16px 16px 40px;
+    padding: 20px 16px 48px;
+    max-width: 100%;
   }
 
-  /* ── Stats ── */
-  .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
-  .stat-value { font-size: 1.5rem; }
-  .section-header h1 { font-size: 1.3rem; }
-  .weak-subj-name { min-width: 120px; font-size: 0.78rem; }
+  /* ── Tighten up content ── */
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .stat-card { padding: 16px 14px; }
+  .stat-value { font-size: 1.6rem; }
+  .stat-label { font-size: 0.7rem; }
+
+  .section-header { margin-bottom: 18px; }
+  .section-header h1 { font-size: 1.25rem; }
+
+  .card { padding: 16px; }
+  .card-header h2 { font-size: 0.92rem; }
+
+  .weak-subj-name { min-width: 110px; font-size: 0.78rem; }
   .tracker-controls { grid-template-columns: 1fr 1fr; }
+  .form-grid { grid-template-columns: 1fr; }
+
+  .section-header .streak-pill { display: none; } /* streak already in topnav */
 }
 
 
