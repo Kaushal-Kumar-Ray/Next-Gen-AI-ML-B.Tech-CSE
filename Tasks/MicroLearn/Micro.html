@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MicroLearn | Skill Enhancement</title>
+    <link rel="icon" type="image/x-icon" href="icon.png">
+    <!-- CSS File -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="../../index.html" class="logo">
+            <img src="logo.png" alt="MicroLearn Logo">
+        </a>
+        <div class="navigation">
+            <ul id="nav-menu">
+                <li><a href="../../index.html">Home</a></li>
+                <li><a href="../../About/about.html">About</a></li>
+                <li><a href="../../Blog/blog.html">Blog</a></li>
+                <li><a class="active" href="../tasks.html">Tasks</a></li>
+                <li><a href="../../resources/course.html">Resources</a></li>
+                <li><a href="../../contact.html">Contact</a></li>
+            </ul>
+            <!-- BUG FIX: added id for JS targeting; removed inline onclick (handled in script.js) -->
+            <img id="menu-btn" src="images/menu.png" alt="Menu">
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <header>
+        <h1>MicroLearn</h1>
+        <p>Learn faster. Practice smarter. Grow daily.</p>
+    </header>
+
+    <!-- MAIN CONTAINER -->
+    <main class="container">
+
+        <!-- FLASHCARD SECTION -->
+        <section class="flashcard-section">
+            <h2>🧠 Interactive Flashcards</h2>
+
+            <!-- CATEGORY FILTER -->
+            <div class="filters" id="filterContainer">
+                <!-- Buttons will be added dynamically -->
+            </div>
+
+            <!-- FLASHCARD -->
+            <!-- BUG FIX: Removed onclick="flipCard()" — was doubling the flip call
+                 since addEventListener('click', flipCard) is already set in script.js -->
+            <div class="flashcard-container">
+                <div class="flashcard" id="flashcard">
+
+                    <!-- FRONT SIDE -->
+                    <div class="card-face card-front">
+                        <span class="card-label">Question</span>
+                        <span class="card-category-badge" id="cardCategoryFront"></span>
+                        <div class="card-content" id="cardQuestion">Loading...</div>
+                        <div class="card-hint">👆 Click to flip</div>
+                    </div>
+
+                    <!-- BACK SIDE -->
+                    <div class="card-face card-back">
+                        <span class="card-label">Answer</span>
+                        <span class="card-category-badge" id="cardCategoryBack"></span>
+                        <div class="card-content" id="cardAnswer">Loading...</div>
+                        <div class="card-hint">👆 Click to flip back</div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- CONTROLS -->
+            <!-- BUG FIX: Removed onclick="prevCard()", onclick="toggleLearned()", onclick="nextCard()"
+                 from all buttons — these were causing every click to fire twice
+                 (once from inline onclick, once from addEventListener in script.js) -->
+            <div class="controls">
+                <button class="btn-nav" id="btnPrev">⬅ Prev</button>
+                <div class="progress" id="progressText">0 / 0</div>
+                <button class="btn-learned" id="btnLearned">Mark as Learned</button>
+                <button class="btn-nav" id="btnNext">Next ➡</button>
+            </div>
+        </section>
+
+        <!-- CONCEPT SECTION -->
+        <section class="concept-section">
+            <h2>📖 Concept Summaries</h2>
+            <div class="concept-grid" id="conceptGrid">
+                <!-- Concept cards will load dynamically -->
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>Copyright ©2025 All rights reserved by [ Next-Gen AI & ML | B.Tech CSE ] Made with ♡ by Kaushal Kumar Ray</p>
+    </footer>
+
+    <!-- JS FILE — defer ensures DOM is ready before script runs -->
+    <script src="script.js" defer></script>
+
+</body>
+</html>

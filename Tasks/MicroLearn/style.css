@@ -1,0 +1,515 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+/* ============================================================
+   ROOT DESIGN SYSTEM (SINGLE SOURCE OF TRUTH)
+   ============================================================ */
+:root {
+  --bg-base:     #0b0f1a;
+  --bg-surface:  #111827;
+  --bg-elevated: #1a2236;
+  --bg-card:     #1e293b;
+  --bg-input:    #1a2236;
+
+  --border-subtle:  rgba(255, 255, 255, 0.07);
+  --border-default: rgba(255, 255, 255, 0.11);
+
+  --accent:      #4f7ef8;
+  --accent-light: #6b96fa;
+  --accent-hover: #3a6af0;
+  --accent-dim:  rgba(79, 126, 248, 0.12);
+
+  --secondary: #10b981;
+
+  --text-primary:   #f1f5f9;
+  --text-secondary: #94a3b8;
+  --text-muted:     #64748b;
+
+  --shadow-sm: 0 4px 6px rgba(0,0,0,0.3);
+  --shadow-md: 0 10px 15px rgba(0,0,0,0.4);
+  --shadow-lg: 0 20px 25px rgba(0,0,0,0.45);
+
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   14px;
+  --radius-full: 9999px;
+
+  --transition-base: all 0.25s ease;
+
+  /* BUG FIX: --transition-slow and --transition-fast were used in nav
+     but never defined — causing CSS to silently fall back to no transition.
+     Added both variables here. */
+  --transition-fast: all 0.15s ease;
+  --transition-slow: all 0.4s ease;
+}
+
+/* ============================================================
+   RESET
+   ============================================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: var(--bg-base);
+  color: var(--text-primary);
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  backdrop-filter: blur(16px);
+  background: rgba(11, 15, 26, 0.82);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1vw 8vw;
+  box-shadow: 0 1px 0 var(--border-subtle), var(--shadow-sm);
+  border-bottom: 1px solid var(--border-subtle);
+  z-index: 999;
+  transition: var(--transition-slow); /* now works — variable is defined */
+}
+
+nav img {
+  width: 160px;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+nav img:hover {
+  opacity: 0.85;
+}
+
+nav .navigation {
+  display: flex;
+  align-items: center;
+}
+
+nav .navigation ul {
+  display: flex;
+  align-items: center;
+}
+
+nav .navigation ul li {
+  list-style: none;
+  margin-left: 30px;
+}
+
+nav .navigation ul li a {
+  text-decoration: none;
+  color: var(--text-secondary);
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: var(--transition-fast); /* now works — variable is defined */
+  position: relative;
+  padding: 5px 10px;
+}
+
+nav .navigation ul li a::before {
+  content: "";
+  position: absolute;
+  width: 0%;
+  height: 2px;
+  bottom: -3px;
+  left: 50%;
+  background: var(--accent);
+  border-radius: var(--radius-full);
+  transition: 0.25s ease;
+}
+
+nav .navigation ul li a:hover::before,
+nav .navigation ul li a.active::before {
+  width: 100%;
+  left: 0;
+}
+
+nav .navigation ul li a:hover,
+nav .navigation ul li a.active {
+  color: var(--text-primary);
+}
+
+#menu-btn {
+  width: 40px;
+  height: 40px;
+  display: none;
+  cursor: pointer;
+  /* BUG FIX: was missing margin-left to separate from nav links on tablet */
+  margin-left: 16px;
+}
+
+@media screen and (max-width: 768px) {
+  nav .navigation ul {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100vh;
+    background: rgba(11, 15, 26, 0.97);
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: 0.3s ease;
+    /* BUG FIX: z-index missing — menu was rendering behind other fixed elements */
+    z-index: 998;
+  }
+
+  nav .navigation ul.active {
+    right: 0;
+  }
+
+  nav .navigation ul li {
+    margin: 20px 0;
+  }
+
+  nav .navigation ul li a {
+    font-size: 20px;
+    color: var(--text-primary);
+  }
+
+  #menu-btn {
+    display: block;
+    /* BUG FIX: z-index ensures hamburger stays above the open menu overlay */
+    position: relative;
+    z-index: 999;
+  }
+}
+
+/* ============================================================
+   HEADER (FLASHCARD PAGE)
+   ============================================================ */
+header {
+  margin-top: 80px;
+  text-align: center;
+  padding: 3rem 1rem;
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  color: #fff;
+  box-shadow: var(--shadow-md);
+}
+
+header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+}
+
+header p {
+  color: rgba(255, 255, 255, 0.8);
+  /* BUG FIX: was using --text-secondary (#94a3b8) over a blue gradient —
+     very low contrast. Changed to semi-transparent white for readability. */
+  margin-top: 0.5rem;
+}
+
+/* ============================================================
+   CONTAINER
+   ============================================================ */
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 6vw 8vw;
+}
+
+/* ============================================================
+   FILTER BUTTONS
+   ============================================================ */
+.filters {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.filter-btn {
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-default);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition-base);
+}
+
+.filter-btn:hover {
+  background: var(--accent-dim);
+  color: var(--accent-light);
+  border-color: var(--accent);
+}
+
+.filter-btn.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+/* ============================================================
+   FLASHCARD
+   ============================================================ */
+.flashcard-container {
+  perspective: 1000px;
+  height: 320px;
+  cursor: pointer;
+  /* BUG FIX: cursor was missing on the container — added here since the
+     flip click is on this element (onclick removed from HTML, wired via JS
+     on the #flashcard inner element). */
+}
+
+.flashcard {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.flashcard.flipped {
+  transform: rotateY(180deg);
+}
+
+/* CARD FACES */
+.card-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-md);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  text-align: center;
+  backface-visibility: hidden;
+  /* BUG FIX: transition was set on .card-face which conflicted with the
+     3D flip transform on .flashcard. The translateY hover was fighting
+     the rotateY flip, causing a jitter/jump mid-animation. Removed the
+     transition from .card-face entirely — the flip transition lives on
+     .flashcard, and hover lift is handled separately below without
+     interfering with backface-visibility. */
+}
+
+/* BUG FIX: Hover lift now only applies when NOT flipping.
+   Use the container hover to avoid interfering with the card's own
+   transform-style:preserve-3d context. */
+.flashcard-container:hover .flashcard:not(.flipped) .card-front,
+.flashcard-container:hover .flashcard.flipped .card-back {
+  box-shadow: var(--shadow-lg);
+}
+
+.card-front {
+  border-top: 4px solid var(--accent);
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  background: var(--bg-elevated);
+  border-top: 4px solid var(--secondary);
+}
+
+/* TEXT */
+.card-content {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.card-label {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.card-category-badge {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: var(--accent-dim);
+  color: var(--accent-light);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+.card-hint {
+  position: absolute;
+  bottom: 15px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   CONTROLS
+   ============================================================ */
+.controls {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-card);
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  gap: 8px;
+}
+
+.btn-nav {
+  background: transparent;
+  border: 1px solid var(--border-default);
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition-base);
+  font-family: inherit;
+  font-size: 0.875rem;
+}
+
+.btn-nav:hover:not(:disabled) {
+  background: var(--accent-dim);
+  color: var(--accent-light);
+  border-color: var(--accent);
+}
+
+/* BUG FIX: disabled buttons had no visual feedback — users couldn't tell
+   the button was inactive. Added proper disabled state styles. */
+.btn-nav:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.progress {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  white-space: nowrap;
+}
+
+/* LEARNED BUTTON */
+.btn-learned {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-default);
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition-base);
+  font-family: inherit;
+  font-size: 0.875rem;
+  /* BUG FIX: cursor was never set on .btn-learned — looked non-interactive */
+}
+
+.btn-learned:hover {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: var(--secondary);
+  color: var(--secondary);
+}
+
+.btn-learned.active {
+  background: var(--secondary);
+  color: #fff;
+  border-color: var(--secondary);
+}
+
+/* ============================================================
+   CONCEPT SECTION
+   ============================================================ */
+.concept-section {
+  margin-top: 60px;
+}
+
+.concept-section h2,
+.flashcard-section h2 {
+  margin-bottom: 24px;
+  font-size: 1.4rem;
+  color: var(--text-primary);
+}
+
+/* ============================================================
+   CONCEPT GRID
+   ============================================================ */
+.concept-grid {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.concept-card {
+  background: var(--bg-card);
+  padding: 20px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-md);
+  transition: var(--transition-base);
+}
+
+.concept-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--border-default);
+}
+
+.concept-card h3 {
+  color: var(--accent-light);
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.concept-card ul {
+  padding-left: 16px;
+}
+
+.concept-card li {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  margin-top: 40px;
+  padding: 20px;
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 600px) {
+  .flashcard-container {
+    height: 360px;
+  }
+
+  .controls {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .progress {
+    width: 100%;
+    text-align: center;
+    order: -1;
+  }
+
+  header h1 {
+    font-size: 1.8rem;
+  }
+}

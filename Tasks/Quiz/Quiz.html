@@ -3,74 +3,414 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz Game</title>
+    <title>Ultimate Tech Quiz</title>
+    <link rel="icon" type="image/x-icon" href="icon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <link rel="stylesheet" href="style.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
-<body><br><br>
-    <h1 class="typing" id="dynamic-text"></h1>
-    <button class="start_quiz">Start Quiz</button>
+<body>
 
-    <div class="quiz-box inactive">
-        <h2 id="question"></h2>
-        <div class="options"></div>
+   <!------------ Navigation -------------->
+        <nav>
+            <a href="../../index.html" class="logo">
+                <img src="logo.png" alt="">
+            </a>
+            <div class="navigation">
+           
+                <ul>
+                    
+                    <li><a href="../../index.html">Home</a></li>
+                    <li><a href="../../About/about.html">About</a></li>
+                    <li><a href="../../Blog/blog.html">Blog</a></li>
+                    <li><a class="active" href="../tasks.html">Tasks</a></li>
+                    <li><a  href="../../resources/course.html">Resources</a></li>
+                    <li><a href="../../contact.html">Contact</a></li>
+                </ul>
+                <img id="menu-btn" src="images/menu.png" alt="">
+            </div>
+        </nav>
 
-        <div class="quiz-footer">
-            <span class="footer-left">
-                <h3 class="ques">Question</h1>
-                <span class="count_que">0</span> / <span class="total_que"></span>
-            </span>
-            <button class="next-btn inactive">Next</button>
-        </div>
-    </div>
+    <div class="bg-particles"></div>
 
-    <div class="result-box inactive">
-        <h2>Quiz Completed!</h2>
-        <div class="result">
-            <h3 id="score">Your Score: 0</h3>
-        </div>
-        <div class="result-footer">
-            <button class="again-quiz">Play Again</button>
-            <button class="exit">Exit</button>
-        </div>
-    </div>
+    <!-- MAIN APP CONTAINER -->
+    <main class="main-container">
+        
+        <!-- START SCREEN -->
+        <section id="start-screen" class="text-center">
+            <div class="mb-8">
+                <h1 class="text-4xl md:text-6xl font-bold text-white mb-4">
+                    <span class="typing-container">System Initialization...</span>
+                </h1>
+                <p class="text-gray-400 text-lg mt-4 max-w-lg mx-auto">Test your knowledge in advanced web technologies, cybersecurity, and algorithms. Are you ready?</p>
+            </div>
+            <button id="start-btn" class="neon-btn text-xl px-10 py-4 mt-8">
+                <i class="fas fa-power-off mr-2"></i> Start Quiz
+            </button>
+        </section>
+
+        <!-- QUIZ SCREEN -->
+        <section id="quiz-screen" class="glass-card hide">
+            <div class="flex justify-between items-center mb-6 text-sm text-gray-400 font-bold brand-font">
+                <span id="question-counter">Question 1/5</span>
+                <span class="flex items-center text-cyan-400">
+                    <i class="fas fa-clock mr-2"></i> <span id="timer">15</span>s
+                </span>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+
+            <h2 id="question-text" class="text-2xl font-semibold mb-8 text-white leading-relaxed">
+                Loading question...
+            </h2>
+
+            <div id="options-container" class="space-y-3">
+                <!-- Options will be injected here via JS -->
+            </div>
+
+            <div class="flex justify-between items-center mt-8 border-t border-gray-700 pt-6">
+                <button id="quit-btn" class="text-gray-400 hover:text-red-400 transition-colors font-semibold">
+                    <i class="fas fa-times mr-1"></i> Abort
+                </button>
+                <button id="next-btn" class="neon-btn" disabled>
+                    Next <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- RESULT SCREEN -->
+        <section id="result-screen" class="glass-card hide text-center">
+            <h2 class="text-3xl font-bold mb-2 brand-font text-cyan-400">Mission Accomplished</h2>
+            <p class="text-gray-400 mb-8">Here is your performance analysis.</p>
+
+            <div class="score-circle" id="score-circle">
+                <div class="score-text" id="score-text">0%</div>
+            </div>
+
+            <div class="grid grid-cols-2 gap-4 mb-8">
+                <div class="bg-gray-800/50 p-4 rounded-lg border border-gray-700">
+                    <p class="text-gray-400 text-sm mb-1">Correct</p>
+                    <p class="text-2xl font-bold text-green-400" id="correct-count">0</p>
+                </div>
+                <div class="bg-gray-800/50 p-4 rounded-lg border border-gray-700">
+                    <p class="text-gray-400 text-sm mb-1">Incorrect</p>
+                    <p class="text-2xl font-bold text-red-400" id="incorrect-count">0</p>
+                </div>
+            </div>
+
+            <div class="flex justify-center space-x-4">
+                <button id="home-btn" class="px-6 py-3 rounded-lg border border-gray-600 text-white hover:bg-gray-700 transition-colors">
+                    <i class="fas fa-home mr-2"></i> Home
+                </button>
+                <button id="restart-btn" class="neon-btn">
+                    <i class="fas fa-redo mr-2"></i> Retry
+                </button>
+            </div>
+        </section>
+
+    </main>
+
     <script>
-        // JavaScript for typing effect
-        const textElement = document.getElementById('dynamic-text');
-        const texts = ["Are you ready", "Let's go"];
-        let currentTextIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- DATA: Questions Array ---
+            const questions = [
+    {
+        question: " What is a data structure?",
+        options: ["A programming language  ", "A way to organize and store data efficiently  ", "A type of computer hardware  ", " A mathematical formula"],
+        answer: 1
+    },
+    {
+        question: " Which is an example of a String array in Python?",
+        options: ["[1, 2, 3]", "['apple', 'banana']", "{'a', 'b', 'c'}", "(1, 2, 3)"],
+        answer: 1
+    },
+    {
+        question: "Indexing in arrays typically starts at:",
+        options: ["0", "-1", "1", "Infinity"],
+        answer: 0
+    },
+    {
+        question: "Which is NOT an advantage of arrays?",
+        options: ["Constant-time element access", "Contiguous memory allocation", "Dynamic resizing", "Cache-friendly"],
+        answer: 2
+    },
+    {
+        question: "Which is a non-linear data structure?",
+        options: ["Array", "LinkedList", "Tree", "Stack"],
+        answer: 2
+    },
+    {
+        question: "A data type differs from a data structure in that: ",
+        options: ["Data types organize data, structures define data nature", "Data structures organize data, types define data nature", "Both are the same", "Data types are only for integers"],
+        answer: 1
+    },
+    {
+        question: "Which is a primitive data type?",
+        options: ["Array", "List", "Sets", "int"],
+        answer: 3
+    },
+    {
+        question: "A linked list is preferred over an array when",
+        options: ["Random access is needed", "Dynamic size is required", "Memory must be contiguous", "Fixed data storage is needded"],
+        answer: 1
+    },
+    {
+        question: "Which Python type is immutable?",
+        options: ["List", "Dictionary", "Sets", "String"],
+        answer: 3
+    },
+    {
+        question: "Choosing the right data structure primarily affects:",
+        options: ["Loop syntax", "Variable naming", "Time and space efficiency", "Code color scheme"],
+        answer: 2
+    },
+    {
+        question: "Which is a linear data structure?",
+        options: ["Tree", "Graph", "Queue", "Hash Table"],
+        answer: 2
+    },
+    {
+        question: "A static data structure has:",
+        options: ["Runtime size changes", "Fixed size at compile time", "Pointers for flexibility", "Hierarchical storage"],
+        answer: 1
+    },
+    {
+        question: "Python's built-in list is implemented as:",
+        options: ["Linked list", "Dynamic array", "Stack", "Heap"],
+        answer: 1
+    },
+    {
+        question: "Static memory allocation occurs:",
+        options: ["During runtime", "At compile time", "When using malloc()", "Never in Python"],
+        answer: 1
+    },
+    {
+        question: "Python manages memory using:",
+        options: ["Manual allocation", "Garbage collection and a private heap", "Static allocation only", "Stack-only allocation"],
+        answer: 1
+    },
+    {
+        question: "A memory leak occurs when:",
+        options: ["Memory is freed too quickly", "Allocated memory is not released", "The heap is empty", "The stack overflows "],
+        answer: 1
+    },
+    {
+        question: "Stack memory is used for:",
+        options: ["Infinite loops ", "Function call management (LIFO)", "Faster execution", "Large data structures"],
+        answer: 1
+    },
+    {
+        question: "A base case in recursion ensures:",
+        options: ["Infinite loops ", "Termination of recursive calls", "Faster execution", "Large data structures"],
+        answer: 1
+    },
+    {
+        question: "The time complexity of accessing an array element by index is:",
+        options: ["O(n)", "O(1)", "O(log n)", "O(n²)"],
+        answer: 1
+    },
+    {
+        question: "A queue follows:",
+        options: ["LIFO", "Priority-based order", "Random order", "FIFO"],
+        answer: 3
+    }
+];
 
-        function typeEffect() {
-            const currentText = texts[currentTextIndex];
-            if (isDeleting) {
-                charIndex--;
-            } else {
-                charIndex++;
+            // --- VARIABLES ---
+            let currentQuestionIndex = 0;
+            let score = 0;
+            let timerInterval;
+            const TIME_PER_QUESTION = 15;
+            let timeLeft = TIME_PER_QUESTION;
+
+            // --- DOM ELEMENTS ---
+            const startScreen = document.getElementById('start-screen');
+            const quizScreen = document.getElementById('quiz-screen');
+            const resultScreen = document.getElementById('result-screen');
+            
+            const startBtn = document.getElementById('start-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const quitBtn = document.getElementById('quit-btn');
+            const restartBtn = document.getElementById('restart-btn');
+            const homeBtn = document.getElementById('home-btn');
+            
+            const questionText = document.getElementById('question-text');
+            const optionsContainer = document.getElementById('options-container');
+            const questionCounter = document.getElementById('question-counter');
+            const progressBar = document.getElementById('progress-bar');
+            const timerElement = document.getElementById('timer');
+            
+            const scoreText = document.getElementById('score-text');
+            const scoreCircle = document.getElementById('score-circle');
+            const correctCount = document.getElementById('correct-count');
+            const incorrectCount = document.getElementById('incorrect-count');
+
+            // --- MOBILE NAV LOGIC ---
+            const menuBtn = document.getElementById('menu-btn');
+            const navMenu = document.querySelector('nav .navigation ul');
+            menuBtn.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+            });
+
+            // --- CORE FUNCTIONS ---
+            
+            function initQuiz() {
+                currentQuestionIndex = 0;
+                score = 0;
+                startScreen.classList.add('hide');
+                resultScreen.classList.add('hide');
+                quizScreen.classList.remove('hide');
+                loadQuestion();
             }
 
-            textElement.textContent = currentText.substring(0, charIndex);
+            function loadQuestion() {
+                resetState();
+                const currentQ = questions[currentQuestionIndex];
+                
+                // Update UI
+                questionText.textContent = currentQ.question;
+                questionCounter.textContent = `Question ${currentQuestionIndex + 1}/${questions.length}`;
+                
+                // Update Progress Bar
+                const progressPercentage = ((currentQuestionIndex) / questions.length) * 100;
+                progressBar.style.width = `${progressPercentage}%`;
 
-            if (!isDeleting && charIndex === currentText.length) {
-                // Pause before deleting
-                setTimeout(() => isDeleting = true, 1000);
-            } else if (isDeleting && charIndex === 0) {
-                // Move to the next text
-                isDeleting = false;
-                currentTextIndex = (currentTextIndex + 1) % texts.length;
+                // Render Options
+                currentQ.options.forEach((optionText, index) => {
+                    const button = document.createElement('button');
+                    button.classList.add('option-btn');
+                    button.innerHTML = `
+                        <span>${optionText}</span>
+                        <i class="fas fa-circle text-xs opacity-30 icon-status"></i>
+                    `;
+                    button.addEventListener('click', () => selectAnswer(button, index));
+                    optionsContainer.appendChild(button);
+                });
+
+                startTimer();
             }
 
-            const typingSpeed = isDeleting ? 50 : 100;
-            setTimeout(typeEffect, typingSpeed);
-        }
+            function resetState() {
+                nextBtn.disabled = true;
+                optionsContainer.innerHTML = '';
+                clearInterval(timerInterval);
+                timeLeft = TIME_PER_QUESTION;
+                timerElement.textContent = timeLeft;
+                timerElement.parentElement.classList.remove('text-red-500');
+                timerElement.parentElement.classList.add('text-cyan-400');
+            }
 
-        // Start the typing effect
-        typeEffect();
+            function startTimer() {
+                timerInterval = setInterval(() => {
+                    timeLeft--;
+                    timerElement.textContent = timeLeft;
+                    
+                    if(timeLeft <= 5) {
+                        timerElement.parentElement.classList.remove('text-cyan-400');
+                        timerElement.parentElement.classList.add('text-red-500');
+                    }
+
+                    if(timeLeft <= 0) {
+                        clearInterval(timerInterval);
+                        handleTimeOut();
+                    }
+                }, 1000);
+            }
+
+            function handleTimeOut() {
+                const correctIndex = questions[currentQuestionIndex].answer;
+                const buttons = optionsContainer.querySelectorAll('.option-btn');
+                
+                buttons.forEach((btn, idx) => {
+                    btn.classList.add('disabled');
+                    if(idx === correctIndex) {
+                        btn.classList.add('correct');
+                        btn.querySelector('.icon-status').className = "fas fa-check text-white";
+                    }
+                });
+                nextBtn.disabled = false;
+            }
+
+            function selectAnswer(selectedBtn, selectedIndex) {
+                clearInterval(timerInterval);
+                const correctIndex = questions[currentQuestionIndex].answer;
+                const buttons = optionsContainer.querySelectorAll('.option-btn');
+
+                // Disable all buttons after selection
+                buttons.forEach(btn => btn.classList.add('disabled'));
+
+                if (selectedIndex === correctIndex) {
+                    selectedBtn.classList.add('correct');
+                    selectedBtn.querySelector('.icon-status').className = "fas fa-check text-white";
+                    score++;
+                } else {
+                    selectedBtn.classList.add('incorrect');
+                    selectedBtn.querySelector('.icon-status').className = "fas fa-times text-white";
+                    
+                    // Highlight correct answer
+                    buttons[correctIndex].classList.add('correct');
+                    buttons[correctIndex].querySelector('.icon-status').className = "fas fa-check text-white";
+                }
+
+                nextBtn.disabled = false;
+            }
+
+            function showResults() {
+                quizScreen.classList.add('hide');
+                resultScreen.classList.remove('hide');
+                
+                const percentage = Math.round((score / questions.length) * 100);
+                
+                // Animate Score Counting
+                let currentScore = 0;
+                const scoreInterval = setInterval(() => {
+                    if (currentScore >= percentage) {
+                        clearInterval(scoreInterval);
+                    } else {
+                        currentScore++;
+                        scoreText.textContent = `${currentScore}%`;
+                        scoreCircle.style.background = `conic-gradient(var(--accent) ${currentScore * 3.6}deg, rgba(255,255,255,0.1) 0deg)`;
+                    }
+                }, 20);
+
+                if(percentage === 0) {
+                    scoreText.textContent = `0%`;
+                    scoreCircle.style.background = `conic-gradient(var(--accent) 0deg, rgba(255,255,255,0.1) 0deg)`;
+                }
+
+                correctCount.textContent = score;
+                incorrectCount.textContent = questions.length - score;
+            }
+
+            // --- EVENT LISTENERS ---
+            startBtn.addEventListener('click', initQuiz);
+            
+            nextBtn.addEventListener('click', () => {
+                currentQuestionIndex++;
+                if (currentQuestionIndex < questions.length) {
+                    loadQuestion();
+                } else {
+                    showResults();
+                }
+            });
+
+            restartBtn.addEventListener('click', initQuiz);
+
+            quitBtn.addEventListener('click', () => {
+                clearInterval(timerInterval);
+                quizScreen.classList.add('hide');
+                startScreen.classList.remove('hide');
+            });
+
+            homeBtn.addEventListener('click', () => {
+                resultScreen.classList.add('hide');
+                startScreen.classList.remove('hide');
+            });
+        });
     </script>
-
-    <script src="script.js"></script>
-    
-    
 </body>
 </html>
